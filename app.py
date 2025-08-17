@@ -111,7 +111,7 @@ chat_container = st.container()
 # Display predefined first message and chat history
 with chat_container:
     if not st.session_state.initialized:
-        first_message = "Hello! I’m your Power Converter Assistant, specializing in the design, manufacturing, and testing of power converters for automotive component testing, particularly e-drive systems. I can provide detailed insights into high-speed, high-power, and high-torque dynamometer applications, including SiC MOSFET-based electronics, switching frequencies up to 48 kHz, control frequencies up to 192 kHz, and dynamometer integration for e-motor validation. Feel free to ask me anything related to these topics!"
+        first_message = "Hello! I’m your Power Converter Assistant, specializing in the design, manufacturing, and testing of power converters for automotive component testing, particularly e-drive systems. I can provide detailed insights into high-speed, high-power, and high-torque dynamometer applications, including SiC MOSFET-based electronics. Feel free to ask me anything related to these topics!"
         st.session_state.messages.append({"role": "assistant", "content": first_message})
         with st.chat_message("assistant"):
             "".join(char for char in st.write_stream(type_writer(first_message)))
