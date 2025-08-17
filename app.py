@@ -5,6 +5,9 @@ from dotenv import load_dotenv
 import base64
 import time
 
+# Set the page title for the browser tab
+st.set_page_config(page_title="Converter Chatbot")
+
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 print("Script started")  # Debug print
@@ -25,11 +28,10 @@ if os.path.exists(image_path):
                 max-width: 300px;
                 height: auto;
                 display: block;
-                margin: 0 auto;
-                position: relative;
-                top: -50px; /* Shift upward */                    
-                pointer-events: none;
-                }}
+                margin: 0 auto; /* Center horizontally */
+                transform: translateY(-100px); /* Shift upward by 100 pixels */
+                pointer-events: none; /* Disable interactivity */
+            }}
             </style>
             <div class="image-container">
                 <img src="data:image/png;base64,{encoded}" alt="Converter Technology Logo">
@@ -40,11 +42,11 @@ if os.path.exists(image_path):
 else:
     st.write(f"Debug: Image not found at {image_path}")
 
-# Define type_writer function before use
+# Define type_writer function for model responses
 def type_writer(text):
     for char in text:
         yield char
-        time.sleep(0.005)  # Faster speed (0.01s per char ~100 chars/sec)
+        time.sleep(0.01)  # Faster speed (0.01s per char ~100 chars/sec)
 
 # Initialize session state
 if "messages" not in st.session_state:
@@ -91,11 +93,11 @@ if prompt := st.chat_input("Your question..."):
     print(f"Received prompt: {prompt}")
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
-        st.markdown(prompt)
+        st.markdown(prompt)  # Display user query instantly
         print("User message displayed")
 
     with st.chat_message("assistant"):
         response = get_response(prompt)
-        "".join(char for char in st.write_stream(type_writer(response)))
+        "".join(char for char in st.write_stream(type_writer(response)))  # Typing effect for model response
         st.session_state.messages.append({"role": "assistant", "content": response})
         print(f"Assistant response: {response}")
