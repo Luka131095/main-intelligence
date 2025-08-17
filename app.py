@@ -29,7 +29,7 @@ if os.path.exists(image_path):
                 height: auto;
                 display: block;
                 margin: 0 auto; /* Center horizontally */
-                transform: translateY(-100px); /* Shift upward by 100 pixels */
+                transform: translateY(-50px); /* Shift upward by 100 pixels */
                 pointer-events: none; /* Disable interactivity */
             }}
             </style>
@@ -46,7 +46,7 @@ else:
 def type_writer(text):
     for char in text:
         yield char
-        time.sleep(0.01)  # Faster speed (0.01s per char ~100 chars/sec)
+        time.sleep(0.005)  # Faster speed (0.01s per char ~100 chars/sec)
 
 # Initialize session state
 if "messages" not in st.session_state:
